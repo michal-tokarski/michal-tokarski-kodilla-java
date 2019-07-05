@@ -1,5 +1,7 @@
 package com.kodilla;
 
+/*
+
 public class Calculator {
 
     public int addition(int A, int B) {
@@ -24,4 +26,4 @@ public class Calculator {
         result = calculator.subtraction(A, B);
         System.out.println("Result: " + result);
     }
-}
+}*/
