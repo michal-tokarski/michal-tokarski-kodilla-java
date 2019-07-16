@@ -7,13 +7,10 @@ import static org.junit.Assert.*;
 public class ShapeCollectorTestSuite {
 
     private static int testCounter = 0;
-    private ShapeCollector iniShapes = null;
 
     @BeforeClass
     public static void beforeAllTests() {
-
         System.out.println("Test suite has begun ...");
-
     }
 
     @Before
@@ -29,7 +26,7 @@ public class ShapeCollectorTestSuite {
 
     @AfterClass
     public static void afterAllTests() {
-        System.out.println("Test suite complete.");
+        System.out.println("Test suite completed.");
     }
 
     @Test
@@ -47,9 +44,8 @@ public class ShapeCollectorTestSuite {
         //Then
         assertEquals(3, shapes.getSize());
         assertTrue(shapes.getShapes().contains(myCircle));
-        assertTrue(shapes.getShapes().contains(mySquare)) ;
-        assertTrue(shapes.getShapes().contains(myTriangle)) ;
-
+        assertTrue(shapes.getShapes().contains(mySquare));
+        assertTrue(shapes.getShapes().contains(myTriangle));
     }
 
     @Test
@@ -94,6 +90,46 @@ public class ShapeCollectorTestSuite {
         assertEquals(figure1, myCircle);
         assertEquals(figure2, mySquare);
         assertEquals(figure3, myTriangle);
+
+    }
+
+    @Test
+    public void testGetFigureWithArgNegative() {
+
+        //Given
+        ShapeCollector shapes = new ShapeCollector();
+        Shape myCircle = new Circle(43);
+        Shape mySquare = new Square(53);
+        Shape myTriangle = new Triangle(63);
+        shapes.addFigure(myCircle);
+        shapes.addFigure(mySquare);
+        shapes.addFigure(myTriangle);
+
+        //When
+        Shape figure1 = shapes.getFigure(-1);
+
+        //Then
+        assertNull(figure1);
+
+    }
+
+    @Test
+    public void testGetFigureWithArgBeyondRange() {
+
+        //Given
+        ShapeCollector shapes = new ShapeCollector();
+        Shape myCircle = new Circle(43);
+        Shape mySquare = new Square(53);
+        Shape myTriangle = new Triangle(63);
+        shapes.addFigure(myCircle);
+        shapes.addFigure(mySquare);
+        shapes.addFigure(myTriangle);
+
+        //When
+        Shape figure1 = shapes.getFigure(shapes.getSize()+1);
+
+        //Then
+        assertNull(figure1);
 
     }
 

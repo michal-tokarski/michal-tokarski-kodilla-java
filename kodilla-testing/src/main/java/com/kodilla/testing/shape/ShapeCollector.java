@@ -23,7 +23,12 @@ public class ShapeCollector {
     }
 
     public Shape getFigure(int n) {
-        return shapes.get(n);
+
+        if(n < shapes.size() && n >= 0){
+            return shapes.get(n);
+        } else {
+            return null;
+        }
     }
 
     public void showFigures() {
