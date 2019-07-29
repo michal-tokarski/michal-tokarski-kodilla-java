@@ -90,6 +90,12 @@ public class StatisticsCalculator {
 
     public static void main(String[] args) {
 
+        ExampleStatistics myExample = new ExampleStatistics ();
+        StatisticsCalculator myCalculator = new StatisticsCalculator (myExample);
+
+        myCalculator.calculateAdvStatistics(myExample);
+        myCalculator.showAdvStatistics(myExample);
+
     }
 
 }
