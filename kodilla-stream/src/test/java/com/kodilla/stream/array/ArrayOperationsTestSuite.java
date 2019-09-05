@@ -2,7 +2,6 @@ package com.kodilla.stream.array;
 
 import org.junit.Assert;
 import org.junit.Test;
-import java.util.Random;
 
 public class ArrayOperationsTestSuite implements ArrayOperations {
 
@@ -10,11 +9,7 @@ public class ArrayOperationsTestSuite implements ArrayOperations {
     public void testGetAverage() {
 
         //Given
-        int[] numbers = new int[20];
-        Random rnd = new Random();
-        for (int i = 0; i < numbers.length; i++) {
-            numbers[i] = rnd.nextInt(100);
-        }
+        int numbers [] = {11,22,33,44,55,66,77,88,99,100,111,222,333,444,555,666,777,888,999,2000};
 
         //When
         int sum = 0;
