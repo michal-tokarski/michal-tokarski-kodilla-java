@@ -2,7 +2,7 @@ package com.kodilla.stream;
 
 import com.kodilla.stream.beautifier.PoemBeautifier;
 
-public class StreamMain_71 {
+public class StreamMain_71_task {
 
     public static void main(String[]args) {
 
