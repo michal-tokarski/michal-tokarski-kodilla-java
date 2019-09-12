@@ -74,7 +74,7 @@ public class BoardTestSuite {
     }
 
     @Test
-    public void testAddTaskList() {
+    public void test1_AddTaskList() {
         //Given
         Board project = prepareTestData();
         //When
@@ -84,7 +84,7 @@ public class BoardTestSuite {
     }
 
     @Test
-    public void testAddTaskListFindUsersTasks() {
+    public void test2_AddTaskListFindUsersTasks() {
         //Given
         Board project = prepareTestData();
         //When
@@ -100,7 +100,7 @@ public class BoardTestSuite {
     }
 
     @Test
-    public void testAddTaskListFindOutdatedTasks() {
+    public void test3_AddTaskListFindOutdatedTasks() {
         //Given
         Board project = prepareTestData();
 
@@ -120,7 +120,7 @@ public class BoardTestSuite {
     }
 
     @Test
-    public void testAddTaskListFindLongTasks() {
+    public void test4_AddTaskListFindLongTasks() {
         //Given
         Board project = prepareTestData();
 
@@ -139,7 +139,7 @@ public class BoardTestSuite {
     }
 
     @Test
-    public void testAddTaskListAverageWorkingOnTask_v1() {
+    public void test5_AddTaskListAverageWorkingOnTask_v1a() {
         //Given
         Board project = prepareTestData();
 
@@ -160,14 +160,40 @@ public class BoardTestSuite {
 
         double avgDaysInProgress = daysInProgress/tasksInProgress;
 
-        System.out.println("Sum of passed days of all tasks-in-progress .......: " + daysInProgress);
-        System.out.println("No. of tasks-in-progress ..........................: " + tasksInProgress);
-        System.out.println("Average no. of passed days per task-in-progres ....: " + avgDaysInProgress);
+        System.out.println("test5_AddTaskListAverageWorkingOnTask_v1a :");
+        System.out.println("- No. of days ongoing of all tasks-in-progress .......: " + daysInProgress);
+        System.out.println("- No. of tasks-in-progress ...........................: " + tasksInProgress);
+        System.out.println("- Average no. of days ongoing per task-in-progres ....: " + avgDaysInProgress);
 
         //Then
         Assert.assertEquals(30, daysInProgress);
         Assert.assertEquals(3, tasksInProgress);
         Assert.assertEquals(10, avgDaysInProgress, 0.001);
     }
+
+    @Test
+    public void test6_AddTaskListAverageWorkingOnTask_v2() {
+        //Given
+        Board project = prepareTestData();
+
+        //When
+        List<TaskList> inProgressTasks = new ArrayList<>();
+        inProgressTasks.add(new TaskList("In progress"));
+
+        double avgDaysInProgress = project.getTaskLists().stream()
+                //.filter(inProgressTasks::contains)
+                .filter(tl -> inProgressTasks.contains(tl))
+                .flatMap(tl -> tl.getTasks().stream())
+                .map(t -> Period.between(t.getCreated(),LocalDate.now()).getDays())
+                .mapToInt(i -> i)
+                .average().orElse(0);
+
+        System.out.println("test6_AddTaskListAverageWorkingOnTask_v2a :");
+        System.out.println("- Average no. of days ongoing per task-in-progres ....: " + avgDaysInProgress);
+
+        //Then
+        Assert.assertEquals(10, avgDaysInProgress, 0.001);
+    }
+
 
 }
