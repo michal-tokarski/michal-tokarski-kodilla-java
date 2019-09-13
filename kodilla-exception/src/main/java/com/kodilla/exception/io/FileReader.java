@@ -21,8 +21,27 @@ public class FileReader {
             System.out.println(path);
             Stream<String> fileLines = Files.lines(path);
             fileLines.forEach(System.out::println);
+
         } catch (IOException e) {
             System.out.println("Something is wrong with the path - " + e);
+
+        } finally {
+            System.out.println("This line will be always shown.");
+        }
+
+    }
+
+    public void readFile2() throws FileReaderException {
+
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("file/names.txt").getFile());
+
+        try (Stream<String> fileLines = Files.lines(Paths.get("test.txt"))) {
+            fileLines.forEach(System.out::println);
+
+        } catch (IOException e) {
+            throw new FileReaderException();
+
         } finally {
             System.out.println("This line will be always shown.");
         }
