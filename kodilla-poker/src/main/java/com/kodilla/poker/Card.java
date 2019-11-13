@@ -1,11 +1,15 @@
 package com.kodilla.poker;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+
+import static javafx.scene.paint.Color.DARKSEAGREEN;
 
 public class Card {
 
     Rank rank;
     Suit suit;
+    boolean isClicked;
 
     public Card(Rank rank, Suit suit) {
         this.rank = rank;
@@ -42,11 +46,55 @@ public class Card {
         return rank + " OF " + suit;
     }
 
+
     ImageView getCardImage() {
         ImageView img = new ImageView(getFilename(getSuit(), getRank()));
         img.setPreserveRatio(true);
         img.setSmooth(true);
-        img.setFitHeight(250.0);
+        img.setFitHeight(220.0);
+
+        Color cardBorderColor = DARKSEAGREEN;
+
+        img.setOnMouseClicked(e -> {
+            isClicked = !isClicked;
+            if (isClicked) {
+                img.setStyle(" -fx-border-color: #CD5C5C ; -fx-border-width: 5px ; -fx-border-style: solid inside");
+                img.setOpacity(0.4f);
+            } else {
+                img.setOpacity(1.0f);
+            }
+        });
+
+
+        /*
+        // *******************
+        // code fragment for changing the image border on mouse click
+        PseudoClass imageViewBorder = PseudoClass.getPseudoClass("border");
+
+        BorderPane imageViewWrapper = new BorderPane(img);
+        imageViewWrapper.getStyleClass().add("image-view-wrapper");
+        // imageViewWrapper.getStyleClass().add("border");
+        imageViewWrapper.pseudoClassStateChanged(imageViewBorder,true);
+
+        BooleanProperty imageViewBorderActive = new SimpleBooleanProperty() {
+            @Override
+            protected void invalidated() {
+                imageViewWrapper.pseudoClassStateChanged(imageViewBorder, get());
+            }
+        };
+
+        img.setOnMouseClicked(ev -> {
+            imageViewBorderActive
+                    .set(!imageViewBorderActive.get());
+            System.out.println("Image clicked " + imageViewBorderActive.get() + " " + imageViewBorder);
+        } );
+
+        BorderPane root = new BorderPane(imageViewWrapper);
+        root.setPadding(new Insets(15));
+        // *******************
+         */
+
+
         return img;
     }
 }
@@ -84,7 +132,7 @@ enum Rank {
     //SIX("6", 6),
     //SEVEN("7", 7),
     //EIGHT("8", 8),
-    //NINE("9", 9),
+    NINE("9", 9),
     TEN("10", 10),
     JACK("jack", 11),
     QUEEN("queen", 12),

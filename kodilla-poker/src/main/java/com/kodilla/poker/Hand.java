@@ -7,22 +7,26 @@ public class Hand extends Analyzer {
 
     private String name;
     private List<Card> cardList;
-    private int handValue;
+    //private int handValue;
 
     public Hand(String name) {
         this.name = name;
         cardList = new ArrayList<>();
-        this.handValue = 0;
+        //this.handValue = 0;
     }
 
     public void addRandomCard(Deck deck) {
         cardList.add(deck.getRandomCard());
     }
 
+    public void addGivenCard(Card card) {
+        cardList.add(card);
+    }
+
 
     public void clearHand() {
         cardList.clear();
-        handValue = 0;
+        //handValue = 0;
     }
 
     public List<Card> getCardList() {
@@ -45,6 +49,7 @@ public class Hand extends Analyzer {
         for (Card c : getCardList()) {
             if (maxRankValue < c.getRank().getRankValue()) {
                 maxRankValue = c.getRank().getRankValue();
+                maxSuitValue = c.getSuit().getSuitValue();
                 highestCard = c;
             } else if ( (maxRankValue == c.getRank().getRankValue())
                     && (maxSuitValue < c.getSuit().getSuitValue()) ) {
