@@ -50,39 +50,14 @@ public class Game {
     // Common variables :
     public int potValue;
     public String gameWinner;
-    public String gameMessage;
-    public String actionMessage;
 
     // Steering variables :
-    public String actionOwner;
-    public String gamePhase;
     public Boolean dealerIsDone;
     public Boolean playerIsDone;
-
-    // Appearance variables :
-    public String backgroundYGrey = "#808080";
-    public String backgroundYellow = "#FFFF00";
-
-    // Game-state settings :
-    public GameState state;
-
-    enum GameState {
-
-        GAME_OPENING(1, "1/6 - New Game"),
-        BETTING_FIRST_ROUND(2, "2/6 - Betting first round"),
-        CARD_SWAPPING(3, "3/6 - Card swapping"),
-        BETTING_SECOND_ROUND(4, "4/6 - Betting second round"),
-        SHOWDOWN(5, "5/6 - Showdown"),
-        GAME_CLOSURE(6, "6/6 - Game Over");
-
-        int stateID;
-        String stateName;
-
-        GameState(int stateID, String stateName) {
-            this.stateID = stateID;
-            this.stateName = stateName;
-        }
-    }
+    public String actionOwner;
+    public String gamePhase;
+    public String instruction;
+    public String gameMessage;
 
 
     public Game() {
@@ -116,8 +91,8 @@ public class Game {
     }
 
     public void initializeCreditsBalance() {
-        dealerCreditsBalance = dealerInitialCredits;
-        playerCreditsBalance = playerInitialCredits;
+        dealerCreditsBalance = initialCredits;
+        playerCreditsBalance = initialCredits;
         Poker_Main.label_Dealer_InitialCredits_Value.setText(String.valueOf(dealerCreditsBalance));
         Poker_Main.label_Player_InitialCredits_Value.setText(String.valueOf(playerCreditsBalance));
     }
@@ -134,6 +109,8 @@ public class Game {
         playerOutstandingBet = 0;
         Poker_Main.label_Dealer_OutstandingBet_Value.setText(String.valueOf(dealerOutstandingBet));
         Poker_Main.label_Player_OutstandingBet_Value.setText(String.valueOf(playerOutstandingBet));
+        Poker_Main.label_Dealer_OutstandingBet_Value.setTextFill(Color.web("#FFFFFF")); // white font
+        Poker_Main.label_Player_OutstandingBet_Value.setTextFill(Color.web("#FFFFFF")); // white font
     }
 
     public void initializeGamesWon() {
@@ -154,23 +131,13 @@ public class Game {
 
     }
 
-    public void initializeActionOwner() {
-        actionOwner = playerName;
-    }
-
-    public void initializeGamePhase() {
-        gamePhase = "Phase 1";
-    }
-
-    public void initializeIsDone() {
+    public void initializeGameSteering() {
         dealerIsDone = false;
         playerIsDone = false;
-    }
-
-    public void initializeGameMessage() {
-        actionMessage = "";
+        actionOwner = "";
+        gamePhase = "";
+        instruction = "";
         gameMessage = "";
-        Poker_Main.label_Common_GameMessage.setText(gameMessage);
     }
 
 
@@ -344,19 +311,18 @@ public class Game {
         // Common values :
         initializePotValue();
         initializeGameWinner();
-        initializeGameMessage();
 
         // Game flow :
         newDeal();
 
         // Steering variables :
-        initializeActionOwner();
-        initializeGamePhase();
-        initializeIsDone();
+        initializeGameSteering();
 
-        // Message
-        actionMessage = "Place your bet";
-        gameMessage = gamePhase + " - " + actionOwner + " : " + actionMessage;
+        // Game Message :
+        actionOwner = "Player";
+        gamePhase = "Phase 1";
+        instruction = "Place your bet";
+        gameMessage = actionOwner + " - " + gamePhase + " : " + instruction;
         updateGameMessage(gameMessage);
 
     }
@@ -375,18 +341,18 @@ public class Game {
         // Common values :
         initializePotValue();
         initializeGameWinner();
-        initializeGameMessage();
 
         // Game flow :
         newDeal();
 
         // Steering variables :
-        initializeActionOwner();
-        initializeGamePhase();
-        initializeIsDone();
+        initializeGameSteering();
 
-        // Message
-        gameMessage = gamePhase + " - " + actionOwner + " : " + "Place your bet";
+        // Game Message :
+        actionOwner = "Player";
+        gamePhase = "Phase 1";
+        instruction = "Place your bet";
+        gameMessage = actionOwner + " - " + gamePhase + " : " + instruction;
         updateGameMessage(gameMessage);
 
     }
@@ -442,25 +408,25 @@ public class Game {
 
         // check if input is numeric :
         if (user.equals(dealerName)) {
-            if (isNumeric(Poker_Main.textfield_Dealer_PlaceBet_Amount.getText())) {
-                dealerCurrentBet = Integer.parseInt(Poker_Main.textfield_Dealer_PlaceBet_Amount.getText());
+            if (isNumeric(Poker_Main.textfield_Dealer_EntryBet_Amount.getText())) {
+                dealerCurrentBet = Integer.parseInt(Poker_Main.textfield_Dealer_EntryBet_Amount.getText());
             }
         } else if (user.equals(playerName)) {
-            if (isNumeric(Poker_Main.textfield_Player_PlaceBet_Amount.getText())) {
-                playerCurrentBet = Integer.parseInt(Poker_Main.textfield_Player_PlaceBet_Amount.getText());
+            if (isNumeric(Poker_Main.textfield_Player_EntryBet_Amount.getText())) {
+                playerCurrentBet = Integer.parseInt(Poker_Main.textfield_Player_EntryBet_Amount.getText());
             }
         }
 
-        // check if sufficient Credits Balance :
+        // validate Credits Balance :
         if (user.equals(dealerName)) {
             if (dealerCreditsBalance < dealerTotalBet + dealerCurrentBet) {
-                gameMessage = user + " : " + "Not sufficient credits to make this bet";
+                gameMessage = user + " - " + "Not sufficient credits to make this bet";
                 updateGameMessage(gameMessage);
                 return;
             }
         } else if (user.equals(playerName)) {
             if (playerCreditsBalance < playerTotalBet + playerCurrentBet) {
-                gameMessage = user + " : " + "Not sufficient credits to make this bet";
+                gameMessage = user + " - " + "Not sufficient credits to make this bet";
                 updateGameMessage(gameMessage);
                 return;
             }
@@ -490,45 +456,60 @@ public class Game {
         // clear Current Bet :
         if (user.equals(dealerName)) {
             dealerCurrentBet = 0;
-            Poker_Main.textfield_Dealer_PlaceBet_Amount.setText(String.valueOf(dealerCurrentBet));
+            Poker_Main.textfield_Dealer_EntryBet_Amount.setText(String.valueOf(dealerCurrentBet));
         } else if (user.equals(playerName)) {
             playerCurrentBet = 0;
-            Poker_Main.textfield_Player_PlaceBet_Amount.setText(String.valueOf(playerCurrentBet));
+            Poker_Main.textfield_Player_EntryBet_Amount.setText(String.valueOf(playerCurrentBet));
         }
 
         // update Outstanding Bet :
         updateOutstandingBet();
 
+    }
 
-        // update Game Message :
-        if (dealerOutstandingBet > 0) {
-            gameMessage = dealerName + " - " + "Phase 1 : Put additional bet";
-        } else if (playerOutstandingBet > 0) {
-            gameMessage = playerName + " - " + "Phase 1 : Put additional bet";
-        } else {
-            gameMessage = actionOwner + " - " + "Phase 2 : Swap cards";
-        }
-        updateGameMessage(gameMessage);
+    public void entryBetDone (String user) {
 
-        // Steering variables :
+        // validate Outstanding Bet
         if (user.equals(dealerName)) {
-            actionOwner = playerName;
+            if (dealerOutstandingBet > 0){
+                gameMessage = "Dealer - Must bet additional " + dealerOutstandingBet + " credits";
+                return;
+            };
+        } else if (user.equals(playerName)) {
+            if (playerOutstandingBet > 0){
+                gameMessage = "Player - Must bet additional " + playerOutstandingBet + " credits";
+                return;
+            };
+        }
+
+        // update IsDone status :
+        if (user.equals(dealerName)) {
             dealerIsDone = true;
         } else if (user.equals(playerName)) {
-            actionOwner = dealerName;
             playerIsDone = true;
         }
 
+        // update Game Message :
         if (dealerIsDone && playerIsDone) {
+            if (user.equals(dealerName)) {
+                actionOwner = playerName;
+                dealerIsDone = false; // for the next phase
+                playerIsDone = false; // for the next phase
+            } else if (user.equals(playerName)) {
+                actionOwner = dealerName;
+            }
             gamePhase = "Phase 2";
-            actionMessage = "Select cards for swap";
-        } else {
+            instruction = "(a) Select cards for swap or (b) Press Done";
+        } else if (!dealerIsDone && playerIsDone) {
+            actionOwner = dealerName;
             gamePhase = "Phase 1";
-            actionMessage = "Place your bet";
+            instruction = "If ready, press Entry Bet Done";
+        } else if (dealerIsDone && !playerIsDone) {
+            actionOwner = playerName;
+            gamePhase = "Phase 1";
+            instruction = "If ready, press Entry Bet Done";
         }
-
-        // Message
-        gameMessage = gamePhase + " - " + actionOwner + " : " + actionMessage;
+        gameMessage = actionOwner + " - " + gamePhase + " : " + instruction;
         updateGameMessage(gameMessage);
 
     }
@@ -544,8 +525,9 @@ public class Game {
 
             // jump out if more than 3 cards have been clicked
             if (collect.size() > 3) {
-                gameMessage = user + " : " + "Maximum 3 cards can be selected for swap - unselect" + (collect.size() - 3) + "cards";
+                gameMessage = user + " - " + "Maximum 3 cards can be selected for swap - unselect" + (collect.size() - 3) + " cards";
                 updateGameMessage(gameMessage);
+                dealerIsDone = false;
                 return;
             }
 
@@ -576,7 +558,8 @@ public class Game {
 
             // jump out of method if more than 3 cards have been clicked
             if (collect.size() > 3) {
-                gameMessage = user + " : " + "Maximum 3 cards can be selected for swap - unselect" + (collect.size() - 3) + "cards";
+                gameMessage = user + " - " + "Maximum 3 cards can be selected for swap - unselect" + (collect.size() - 3) + " cards";
+                playerIsDone = false;
                 return;
             }
 
@@ -601,40 +584,38 @@ public class Game {
 
         }
 
-        // Steering variables :
+    }
+
+    public void swapCardsDone (String user) {
+
+        // update IsDone status :
         if (user.equals(dealerName)) {
-            actionOwner = playerName;
             dealerIsDone = true;
         } else if (user.equals(playerName)) {
-            actionOwner = dealerName;
             playerIsDone = true;
         }
 
-        if (dealerIsDone && playerIsDone) {
-            gamePhase = "Phase 3";
-            actionMessage = "Raise your bet or Call or Fold";
-        } else {
-            gamePhase = "Phase 2";
-            actionMessage = "Select cards for swap";
-        }
-
-        // Message
-        gameMessage = gamePhase + " - " + actionOwner + " : " + actionMessage;
-        updateGameMessage(gameMessage);
-
-    }
-
-    public void stand(String user) {
-
-        // change Action Ownership :
-        if (user.equals(dealerName)) {
-            actionOwner = playerName;
-        } else if (user.equals(playerName)) {
-            actionOwner = dealerName;
-        }
-
         // update Game Message :
-        gameMessage = actionOwner + " - " + "Phase 3 : Raise bet / Call / Fold";
+        if (dealerIsDone && playerIsDone) {
+            if (user.equals(dealerName)) {
+                actionOwner = playerName;
+                dealerIsDone = false; // for the next phase
+                playerIsDone = false; // for the next phase
+            } else if (user.equals(playerName)) {
+                actionOwner = dealerName;
+            }
+            gamePhase = "Phase 3";
+            instruction = "(a) Raise bet or (b) Call or (c) Fold";
+        } else if (!dealerIsDone && playerIsDone) {
+            actionOwner = dealerName;
+            gamePhase = "Phase 2";
+            instruction = "Select cards for swap or press Done";
+        } else if (dealerIsDone && !playerIsDone) {
+            actionOwner = playerName;
+            gamePhase = "Phase 2";
+            instruction = "Select cards for swap or press Done";
+        }
+        gameMessage = actionOwner + " - " + gamePhase + " : " + instruction;
         updateGameMessage(gameMessage);
 
     }
@@ -643,25 +624,25 @@ public class Game {
 
         // check if input is numeric :
         if (user.equals(dealerName)) {
-            if (isNumeric(Poker_Main.textfield_Dealer_PlaceBet_Amount.getText())) {
+            if (isNumeric(Poker_Main.textfield_Dealer_EntryBet_Amount.getText())) {
                 dealerCurrentBet = Integer.parseInt(Poker_Main.textfield_Dealer_RaiseBet_Amount.getText());
             }
         } else if (user.equals(playerName)) {
-            if (isNumeric(Poker_Main.textfield_Player_PlaceBet_Amount.getText())) {
+            if (isNumeric(Poker_Main.textfield_Player_EntryBet_Amount.getText())) {
                 playerCurrentBet = Integer.parseInt(Poker_Main.textfield_Player_RaiseBet_Amount.getText());
             }
         }
 
-        // check if sufficient Credits Balance :
+        // validate Credits Balance :
         if (user.equals(dealerName)) {
             if (dealerCreditsBalance < dealerTotalBet + dealerCurrentBet) {
-                gameMessage = user + " : " + "Not sufficient credits to make this bet";
+                gameMessage = user + " - " + "Not sufficient credits to make this bet";
                 updateGameMessage(gameMessage);
                 return;
             }
         } else if (user.equals(playerName)) {
             if (playerCreditsBalance < playerTotalBet + playerCurrentBet) {
-                gameMessage = user + " : " + "Not sufficient credits to make this bet";
+                gameMessage = user + " - " + "Not sufficient credits to make this bet";
                 updateGameMessage(gameMessage);
                 return;
             }
@@ -700,53 +681,72 @@ public class Game {
         // update Outstanding Bet :
         updateOutstandingBet();
 
-
-        // change Action Ownership :
-        if (user.equals(dealerName)) {
-            actionOwner = playerName;
-        } else if (user.equals(playerName)) {
-            actionOwner = dealerName;
-        }
-
-        // update Game Message :
+        // validate Outstanding Bet :
         if (dealerOutstandingBet > 0) {
-            gameMessage = dealerName + " - " + "Phase 1 : Put additional bet";
+            gamePhase = "Phase 3";
+            actionOwner = dealerName;
+            instruction = "Put additional bet : at least " + dealerOutstandingBet ;
         } else if (playerOutstandingBet > 0) {
-            gameMessage = playerName + " - " + "Phase 1 : Put additional bet";
-        } else {
-            gameMessage = actionOwner + " - " + "Phase 2 : Swap cards";
+            actionOwner = playerName;
+            gamePhase = "Phase 3";
+            instruction = "Put additional bet : at least " + playerOutstandingBet ;
         }
+        gameMessage = actionOwner + " - " + gamePhase + " : " + instruction;
         updateGameMessage(gameMessage);
 
     }
 
     public void call(String user) {
 
-        // update Total Bet :
+        // check if sufficient Credits Balance :
         if (user.equals(dealerName)) {
-            updateTotalBet(dealerName, dealerOutstandingBet);
+            if (dealerCreditsBalance < dealerOutstandingBet) {
+                gameMessage = user + " : " + "Not sufficient credits to make this bet";
+                updateGameMessage(gameMessage);
+                return;
+            }
         } else if (user.equals(playerName)) {
-            updateTotalBet(playerName, playerOutstandingBet);
+            if (playerCreditsBalance < playerOutstandingBet) {
+                gameMessage = user + " : " + "Not sufficient credits to make this bet";
+                updateGameMessage(gameMessage);
+                return;
+            }
         }
 
         // determine Game Winner :
         gameWinner = determineGameWinner();
+
         // update Game Winner :
         updateGameWinner(gameWinner);
-        updateGamesWon(gameWinner);
-
-        // update CreditsBalance :
-        if (gameWinner.equals(dealerName)) {
-            updateCreditsBalance(dealerName, potValue);
-        } else if (gameWinner.equals(playerName)) {
-            updateCreditsBalance(playerName, potValue);
-        }
 
         // update Games Won :
         if (gameWinner.equals(dealerName)) {
             updateGamesWon(dealerName);
         } else if (gameWinner.equals(playerName)) {
             updateGamesWon(playerName);
+        }
+
+        // update Total Bet :
+        if (user.equals(dealerName)) {
+            dealerCurrentBet = dealerOutstandingBet;
+            updateTotalBet(dealerName, dealerCurrentBet);
+        } else if (user.equals(playerName)) {
+            playerCurrentBet = playerOutstandingBet;
+            updateTotalBet(playerName, playerCurrentBet);
+        }
+
+        // update Pot Value :
+        if (user.equals(dealerName)) {
+            updatePotValue(dealerName, dealerCurrentBet);
+        } else if (user.equals(playerName)) {
+            updatePotValue(playerName, playerCurrentBet);
+        }
+
+        // update CreditsBalance :
+        if (gameWinner.equals(dealerName)) {
+            updateCreditsBalance(dealerName, potValue);
+        } else if (gameWinner.equals(playerName)) {
+            updateCreditsBalance(playerName, potValue);
         }
 
         // update Game Message :
@@ -757,28 +757,42 @@ public class Game {
 
     public void fold(String user) {
 
-        // set Game Winner :
+        // determine Game Winner :
         if (user.equals(dealerName)) {
             gameWinner = playerName;
         } else if (user.equals(playerName)) {
             gameWinner = dealerName;
         }
+
         // update Game Winner :
         updateGameWinner(gameWinner);
-        updateGamesWon(gameWinner);
-
-        // update CreditsBalance :
-        if (user.equals(dealerName)) {
-            updateCreditsBalance(playerName, potValue);
-        } else if (user.equals(playerName)) {
-            updateCreditsBalance(dealerName, potValue);
-        }
 
         // update Games Won :
         if (user.equals(dealerName)) {
             updateGamesWon(playerName);
         } else if (user.equals(playerName)) {
             updateGamesWon(dealerName);
+        }
+
+        // update Total Bet :
+        if (user.equals(dealerName)) {
+            updateTotalBet(dealerName, 0);
+        } else if (user.equals(playerName)) {
+            updateTotalBet(playerName, 0);
+        }
+
+        // update Pot Value :
+        if (user.equals(dealerName)) {
+            updatePotValue(dealerName, 0);
+        } else if (user.equals(playerName)) {
+            updatePotValue(playerName, 0);
+        }
+
+        // update Credits Balance :
+        if (user.equals(dealerName)) {
+            updateCreditsBalance(playerName, potValue);
+        } else if (user.equals(playerName)) {
+            updateCreditsBalance(dealerName, potValue);
         }
 
         // update Game Message :

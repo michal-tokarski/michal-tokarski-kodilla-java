@@ -23,7 +23,6 @@ public class Poker_Main extends Application {
     public static GridPane gridPane_UpperMain               = new GridPane();
     public static Button button_Common_StartPlay            = new Button("Start play");
     public static Button button_Common_ExitPlay             = new Button("Exit play");
-    public static Button button_Common_GameRules            = new Button("Game Rules");
     public static Label label_Common_GameMessage            = new Label();
 
 
@@ -96,30 +95,30 @@ public class Poker_Main extends Application {
     // User interface - Dealer / Player :
     // ======================================================================================================
     // Dealer :
-    public static Button button_Dealer_NewGame        = new Button("Phase 0" + "\n" + "New Game");
-    public static Button button_Dealer_EntryBet       = new Button("Phase 1" + "\n" + "Entry bet");
-    public static Button button_Dealer_Check1         = new Button("Phase 1" + "\n" + "Check (wait)");
-    public static Button button_Dealer_SwapCards      = new Button("Phase 2" + "\n" + "Swap cards");
-    public static Button button_Dealer_Stand          = new Button("Phase 2" + "\n" + "Stand (no swap)");
-    public static Button button_Dealer_RaiseBet       = new Button("Phase 3" + "\n" + "Raise bet");
-    public static Button button_Dealer_Check3         = new Button("Phase 3" + "\n" + "Check (wait)");
-    public static Button button_Dealer_Call           = new Button("Phase 3" + "\n" + "Call");
-    public static Button button_Dealer_Fold           = new Button("Phase 3" + "\n" + "Fold (pass)");
+    public static Button button_Dealer_NewGame          = new Button("Phase 0" + "\n" + "New Game");
+    public static Button button_Dealer_EntryBet         = new Button("Phase 1" + "\n" + "Entry bet");
+    public static Button button_Dealer_EntryBet_Done    = new Button("Phase 1" + "\n" + "Done");
+    public static Button button_Dealer_SwapCards        = new Button("Phase 2" + "\n" + "Swap cards");
+    public static Button button_Dealer_SwapCards_Done   = new Button("Phase 2" + "\n" + "Done");
+    public static Button button_Dealer_RaiseBet         = new Button("Phase 3" + "\n" + "Raise bet");
+    public static Button button_Dealer_Check3           = new Button("Phase 3" + "\n" + "Check (wait)");
+    public static Button button_Dealer_Call             = new Button("Phase 3" + "\n" + "Call");
+    public static Button button_Dealer_Fold             = new Button("Phase 3" + "\n" + "Fold (pass)");
 
     // Player :
-    public static Button button_Player_NewGame        = new Button("Phase 0" + "\n" + "New Game");
-    public static Button button_Player_EntryBet       = new Button("Phase 1" + "\n" + "Entry bet");
-    public static Button button_Player_Check1         = new Button("Phase 1" + "\n" + "Check (wait)");
-    public static Button button_Player_SwapCards      = new Button("Phase 2" + "\n" + "Swap cards");
-    public static Button button_Player_Stand          = new Button("Phase 2" + "\n" + "Stand (no swap)");
-    public static Button button_Player_RaiseBet       = new Button("Phase 3" + "\n" + "Raise bet");
-    public static Button button_Player_Check3         = new Button("Phase 3" + "\n" + "Check (wait)");
-    public static Button button_Player_Call           = new Button("Phase 3" + "\n" + "Call");
-    public static Button button_Player_Fold           = new Button("Phase 3" + "\n" + "Fold (pass)");
+    public static Button button_Player_NewGame          = new Button("Phase 0" + "\n" + "New Game");
+    public static Button button_Player_EntryBet         = new Button("Phase 1" + "\n" + "Entry bet");
+    public static Button button_Player_EntryBet_Done    = new Button("Phase 1" + "\n" + "Done");
+    public static Button button_Player_SwapCards        = new Button("Phase 2" + "\n" + "Swap cards");
+    public static Button button_Player_SwapCards_Done   = new Button("Phase 2" + "\n" + "Done");
+    public static Button button_Player_RaiseBet         = new Button("Phase 3" + "\n" + "Raise bet");
+    public static Button button_Player_Check3           = new Button("Phase 3" + "\n" + "Check (wait)");
+    public static Button button_Player_Call             = new Button("Phase 3" + "\n" + "Call");
+    public static Button button_Player_Fold             = new Button("Phase 3" + "\n" + "Fold (pass)");
 
     // PlaceBet_Amount :
-    public static TextField textfield_Dealer_PlaceBet_Amount = new TextField ("Bet amount");
-    public static TextField textfield_Player_PlaceBet_Amount = new TextField ("Bet amount");
+    public static TextField textfield_Dealer_EntryBet_Amount = new TextField ("Entry amount");
+    public static TextField textfield_Player_EntryBet_Amount = new TextField ("Entry amount");
     // RaiseBet_Amount :
     public static TextField textfield_Dealer_RaiseBet_Amount = new TextField ("Raise amount");
     public static TextField textfield_Player_RaiseBet_Amount = new TextField ("Raise amount");
@@ -188,7 +187,7 @@ public class Poker_Main extends Application {
         label_Player_InitialCredits_Value.setTextFill(Color.web("#FFF"));
         label_Player_InitialCredits_Value.setFont(new Font("Arial", fontSize1));
 
-        // Labels - Credits Left :
+        // Labels - Credits Balance :
         label_Dealer_CreditsBalance_Caption.setTextFill(Color.web("#FFF"));
         label_Dealer_CreditsBalance_Caption.setFont(new Font("Arial", fontSize1));
         label_Player_CreditsBalance_Caption.setTextFill(Color.web("#FFF"));
@@ -247,7 +246,7 @@ public class Poker_Main extends Application {
 
 
         // Buttons & Textfields - appearance settings :
-        // =========================================================================================
+        // ======================================================================================================
         double buttonHeight = 50;
         double buttonWidth = 120;
         double textfieldHeight = 50;
@@ -255,14 +254,13 @@ public class Poker_Main extends Application {
 
         button_Common_StartPlay             .setMinSize (buttonWidth, buttonHeight);
         button_Common_ExitPlay              .setMinSize (buttonWidth, buttonHeight);
-        button_Common_GameRules             .setMinSize (buttonWidth, buttonHeight);
 
         button_Dealer_NewGame               .setMinSize (buttonWidth, buttonHeight);
         button_Dealer_EntryBet              .setMinSize (buttonWidth, buttonHeight);
-        textfield_Dealer_PlaceBet_Amount    .setPrefSize (textfieldWidth, textfieldHeight);
-        button_Dealer_Check1                .setMinSize (buttonWidth, buttonHeight);
+        textfield_Dealer_EntryBet_Amount    .setPrefSize (textfieldWidth, textfieldHeight);
+        button_Dealer_EntryBet_Done         .setMinSize (buttonWidth, buttonHeight);
         button_Dealer_SwapCards             .setMinSize (buttonWidth, buttonHeight);
-        button_Dealer_Stand                 .setMinSize (buttonWidth, buttonHeight);
+        button_Dealer_SwapCards_Done        .setMinSize (buttonWidth, buttonHeight);
         button_Dealer_Check3                .setMinSize (buttonWidth, buttonHeight);
         button_Dealer_RaiseBet              .setMinSize (buttonWidth, buttonHeight);
         textfield_Dealer_RaiseBet_Amount    .setPrefSize (textfieldWidth, textfieldHeight);
@@ -271,10 +269,10 @@ public class Poker_Main extends Application {
 
         button_Player_NewGame               .setMinSize (buttonWidth, buttonHeight);
         button_Player_EntryBet              .setMinSize (buttonWidth, buttonHeight);
-        textfield_Player_PlaceBet_Amount    .setPrefSize (textfieldWidth, textfieldHeight);
-        button_Player_Check1                .setMinSize (buttonWidth, buttonHeight);
+        textfield_Player_EntryBet_Amount    .setPrefSize (textfieldWidth, textfieldHeight);
+        button_Player_EntryBet_Done         .setMinSize (buttonWidth, buttonHeight);
         button_Player_SwapCards             .setMinSize (buttonWidth, buttonHeight);
-        button_Player_Stand                 .setMinSize (buttonWidth, buttonHeight);
+        button_Player_SwapCards_Done        .setMinSize (buttonWidth, buttonHeight);
         button_Player_Check3                .setMinSize (buttonWidth, buttonHeight);
         button_Player_RaiseBet              .setMinSize (buttonWidth, buttonHeight);
         textfield_Player_RaiseBet_Amount    .setPrefSize (textfieldWidth, textfieldHeight);
@@ -288,16 +286,15 @@ public class Poker_Main extends Application {
         // Common : Upper Main - add elements :
         gridPane_UpperMain.add(button_Common_StartPlay,          0, 0);
         gridPane_UpperMain.add(button_Common_ExitPlay,           1, 0);
-        gridPane_UpperMain.add(button_Common_GameRules,          2, 0);
         gridPane_UpperMain.add(label_Common_GameMessage,         3, 0);
 
         // Dealer : User Interface - add elements :
         gridPane_Dealer_UserInterface.add(button_Dealer_NewGame,            0, 0);
         gridPane_Dealer_UserInterface.add(button_Dealer_EntryBet,           1, 0);
-        gridPane_Dealer_UserInterface.add(textfield_Dealer_PlaceBet_Amount, 1, 1);
-        //gridPane_Dealer_UserInterface.add(button_Dealer_Check1,             2, 0);
+        gridPane_Dealer_UserInterface.add(textfield_Dealer_EntryBet_Amount, 1, 1);
+        gridPane_Dealer_UserInterface.add(button_Dealer_EntryBet_Done,      2, 0);
         gridPane_Dealer_UserInterface.add(button_Dealer_SwapCards,          3, 0);
-        gridPane_Dealer_UserInterface.add(button_Dealer_Stand,              4, 0);
+        gridPane_Dealer_UserInterface.add(button_Dealer_SwapCards_Done,     4, 0);
         gridPane_Dealer_UserInterface.add(button_Dealer_RaiseBet,           5, 0);
         gridPane_Dealer_UserInterface.add(textfield_Dealer_RaiseBet_Amount, 5, 1);
         //gridPane_Dealer_UserInterface.add(button_Dealer_Check3,             6, 0);
@@ -307,13 +304,12 @@ public class Poker_Main extends Application {
         // Player : User Interface - add elements :
         gridPane_Player_UserInterface.add(button_Player_NewGame,            0, 0);
         gridPane_Player_UserInterface.add(button_Player_EntryBet,           1, 0);
-        gridPane_Player_UserInterface.add(textfield_Player_PlaceBet_Amount, 1, 1);
-        //gridPane_Player_UserInterface.add(button_Player_Check1,             2, 0);
+        gridPane_Player_UserInterface.add(textfield_Player_EntryBet_Amount, 1, 1);
+        gridPane_Player_UserInterface.add(button_Player_EntryBet_Done,      2, 0);
         gridPane_Player_UserInterface.add(button_Player_SwapCards,          3, 0);
-        gridPane_Player_UserInterface.add(button_Player_Stand,              4, 0);
+        gridPane_Player_UserInterface.add(button_Player_SwapCards_Done,     4, 0);
         gridPane_Player_UserInterface.add(button_Player_RaiseBet,           5, 0);
         gridPane_Player_UserInterface.add(textfield_Player_RaiseBet_Amount, 5, 1);
-        //gridPane_Player_UserInterface.add(button_Player_Check3,             6, 0);
         gridPane_Player_UserInterface.add(button_Player_Call,               7, 0);
         gridPane_Player_UserInterface.add(button_Player_Fold,               8, 0);
         
@@ -357,19 +353,15 @@ public class Poker_Main extends Application {
 
 
         // Gridpanes - appearance settings :
-        // =========================================================================================
-
-        // Upper Main - settings :
+        // ======================================================================================================
         gridPane_UpperMain.setVgap(50);
         gridPane_UpperMain.setHgap(30);
 
-        // UserInterface - settings :
         gridPane_Dealer_GameInfo.setVgap(10);
         gridPane_Dealer_GameInfo.setHgap(30);
         gridPane_Player_GameInfo.setVgap(10);
         gridPane_Player_GameInfo.setHgap(30);
 
-        // GameInfo - settings :
         gridPane_Dealer_GameInfo.setVgap(10);
         gridPane_Dealer_GameInfo.setHgap(0);
         gridPane_Player_GameInfo.setVgap(10);
@@ -377,9 +369,8 @@ public class Poker_Main extends Application {
         gridPane_Common_GameInfo.setVgap(10);
         gridPane_Common_GameInfo.setHgap(0);
 
-
         // Scene and Stage :
-        // =========================================================================================
+        // ======================================================================================================
         GridPane gridPane_Main = new GridPane();
         Scene scene = new Scene(gridPane_Main, 1600, 900);
         scene.getStylesheets().add(getClass().getResource("/card_appearance_extras.css").toExternalForm());
@@ -389,6 +380,7 @@ public class Poker_Main extends Application {
         primaryStage.show();
 
         // GridPane Main - settings :
+        // ======================================================================================================
         gridPane_Main.setAlignment(Pos.CENTER);
         gridPane_Main.setPadding(new Insets(20, 10, 20, 10));
         gridPane_Main.setHgap(5);
@@ -397,6 +389,7 @@ public class Poker_Main extends Application {
         gridPane_Main.setGridLinesVisible(true);
 
         // GridPane_Main - add elements :
+        // ======================================================================================================
         gridPane_Main.add(gridPane_UpperMain,                       0,0);
         gridPane_Main.add(label_Dealer_Heading,                     0,2);
         gridPane_Main.add(flowpane_Dealer_Hand_CardImages,          0,3, 5, 1);
@@ -408,7 +401,6 @@ public class Poker_Main extends Application {
         gridPane_Main.add(gridPane_Player_GameInfo,                 1,7);
         gridPane_Main.add(gridPane_Player_UserInterface,            0,9);
 
-
         // Buttons - actions :
         // ======================================================================================================
         Game currentGame = new Game();
@@ -416,26 +408,23 @@ public class Poker_Main extends Application {
         button_Common_StartPlay         .setOnAction(e -> currentGame.startPlay());
         button_Common_ExitPlay          .setOnAction(e -> currentGame.exitPlay());
 
-        button_Dealer_NewGame           .setOnAction(e -> currentGame.newGame   ("Dealer"));
-        button_Dealer_EntryBet          .setOnAction(e -> currentGame.entryBet  ("Dealer"));
-        button_Dealer_SwapCards         .setOnAction(e -> currentGame.swapCards ("Dealer"));
-        button_Dealer_Stand             .setOnAction(e -> currentGame.stand     ("Dealer"));
-        button_Dealer_RaiseBet          .setOnAction(e -> currentGame.raiseBet  ("Dealer"));
-        button_Dealer_Call              .setOnAction(e -> currentGame.call      ("Dealer"));
-        button_Dealer_Fold              .setOnAction(e -> currentGame.fold      ("Dealer"));
+        button_Dealer_NewGame           .setOnAction(e -> currentGame.newGame       ("Dealer"));
+        button_Dealer_EntryBet          .setOnAction(e -> currentGame.entryBet      ("Dealer"));
+        button_Dealer_EntryBet_Done     .setOnAction(e -> currentGame.entryBetDone  ("Dealer"));
+        button_Dealer_SwapCards         .setOnAction(e -> currentGame.swapCards     ("Dealer"));
+        button_Dealer_SwapCards_Done    .setOnAction(e -> currentGame.swapCardsDone ("Dealer"));
+        button_Dealer_RaiseBet          .setOnAction(e -> currentGame.raiseBet      ("Dealer"));
+        button_Dealer_Call              .setOnAction(e -> currentGame.call          ("Dealer"));
+        button_Dealer_Fold              .setOnAction(e -> currentGame.fold          ("Dealer"));
 
-        button_Player_NewGame           .setOnAction(e -> currentGame.newGame   ("Player"));
-        button_Player_EntryBet          .setOnAction(e -> currentGame.entryBet  ("Player"));
-        button_Player_SwapCards         .setOnAction(e -> currentGame.swapCards ("Player"));
-        button_Player_Stand             .setOnAction(e -> currentGame.stand     ("Player"));
-        button_Player_RaiseBet          .setOnAction(e -> currentGame.raiseBet  ("Player"));
-        button_Player_Call              .setOnAction(e -> currentGame.call      ("Player"));
-        button_Player_Fold              .setOnAction(e -> currentGame.fold      ("Player"));
-
-
-        // GameState
-        // ======================================================================================================
-        currentGame.state = Game.GameState.GAME_OPENING;
+        button_Player_NewGame           .setOnAction(e -> currentGame.newGame       ("Player"));
+        button_Player_EntryBet          .setOnAction(e -> currentGame.entryBet      ("Player"));
+        button_Player_EntryBet_Done     .setOnAction(e -> currentGame.entryBetDone  ("Player"));
+        button_Player_SwapCards         .setOnAction(e -> currentGame.swapCards     ("Player"));
+        button_Player_SwapCards_Done    .setOnAction(e -> currentGame.swapCardsDone ("Player"));
+        button_Player_RaiseBet          .setOnAction(e -> currentGame.raiseBet      ("Player"));
+        button_Player_Call              .setOnAction(e -> currentGame.call          ("Player"));
+        button_Player_Fold              .setOnAction(e -> currentGame.fold          ("Player"));
 
     }
 

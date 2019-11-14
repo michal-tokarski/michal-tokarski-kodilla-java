@@ -49,7 +49,6 @@ public class Analyzer {
 
     }
 
-
     public int[] produceRankList(Hand argHand) {
 
         int rankList[] = new int[argHand.getCardList().size()];

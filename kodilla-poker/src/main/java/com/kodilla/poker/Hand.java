@@ -65,4 +65,5 @@ public class Hand extends Analyzer {
         pokerCategory = determinePokerCategory(argHand);
         return pokerCategory;
     }
+
 }

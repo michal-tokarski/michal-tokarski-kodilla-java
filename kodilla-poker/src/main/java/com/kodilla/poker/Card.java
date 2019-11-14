@@ -65,36 +65,6 @@ public class Card {
             }
         });
 
-
-        /*
-        // *******************
-        // code fragment for changing the image border on mouse click
-        PseudoClass imageViewBorder = PseudoClass.getPseudoClass("border");
-
-        BorderPane imageViewWrapper = new BorderPane(img);
-        imageViewWrapper.getStyleClass().add("image-view-wrapper");
-        // imageViewWrapper.getStyleClass().add("border");
-        imageViewWrapper.pseudoClassStateChanged(imageViewBorder,true);
-
-        BooleanProperty imageViewBorderActive = new SimpleBooleanProperty() {
-            @Override
-            protected void invalidated() {
-                imageViewWrapper.pseudoClassStateChanged(imageViewBorder, get());
-            }
-        };
-
-        img.setOnMouseClicked(ev -> {
-            imageViewBorderActive
-                    .set(!imageViewBorderActive.get());
-            System.out.println("Image clicked " + imageViewBorderActive.get() + " " + imageViewBorder);
-        } );
-
-        BorderPane root = new BorderPane(imageViewWrapper);
-        root.setPadding(new Insets(15));
-        // *******************
-         */
-
-
         return img;
     }
 }
@@ -125,6 +95,7 @@ enum Suit {
 
 enum Rank {
 
+    // * Manually eliminated some cards to make the game more interactive
     //TWO("2", 2),
     //THREE("3", 3),
     //FOUR("4", 4),
@@ -132,6 +103,7 @@ enum Rank {
     //SIX("6", 6),
     //SEVEN("7", 7),
     //EIGHT("8", 8),
+
     NINE("9", 9),
     TEN("10", 10),
     JACK("jack", 11),
