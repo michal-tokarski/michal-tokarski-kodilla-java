@@ -10,4 +10,5 @@ include 'kodilla-exception'
 include 'kodilla-myProject1'
 include 'kodilla-blackjack'
 include 'kodilla-poker'
+include 'kodilla-good-patterns'
 
