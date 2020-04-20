@@ -2,17 +2,17 @@ package com.kodilla.good.patterns.challenges.Allegro;
 
 public class ProductOrderService {
 
-    private ProductOrder productOrder;
+    // private ProductOrder productOrder;
     private InfoService_email infoService_email;
     private ProductOrderRepository productOrderRepository;
 
     public ProductOrderService (
-            final ProductOrder productOrder,
+            // final ProductOrder productOrder,
             final InfoService_email infoService_email,
             final ProductOrderRepository productOrderRepository
     )
     {
-        this.productOrder = productOrder;
+        // this.productOrder = productOrder;
         this.infoService_email = infoService_email;
         this.productOrderRepository = productOrderRepository;
     }

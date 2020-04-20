@@ -1,13 +1,15 @@
 package com.kodilla.good.patterns.challenges.Allegro;
 
 /*
-Module 13.2 - SOLID + DRY
-Task :
+Module 13.2
+Task - Allegro :
+-------------------------------
 Wewnątrz pakietu com.kodilla.good.patterns.challenges stwórz klasę ProductOrderService.
 Serwis powinien zajmować się wykonywaniem zamówień różnego rodzaju produktów
 - gier, kapcie, szczoteczek do zębów… innymi słowy, Allegro :)
 Pamiętaj o stworzeniu niezbędnych interfejsów i klas które będą implementować stworzone interfejsy.
 Program należy uruchomić za pomocą metody main().
+-------------------------------
  */
 
 public class Application_main {
@@ -25,7 +27,7 @@ public class Application_main {
 
         // Create an object for servicing the product order
         ProductOrderService myProductOrderService = new ProductOrderService(
-                myProductOrder,
+                // myProductOrder,
                 new InfoService_email(),
                 new ProductOrderRepository()
                 );
