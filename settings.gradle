@@ -11,4 +11,6 @@ include 'kodilla-myProject1'
 include 'kodilla-blackjack'
 include 'kodilla-poker'
 include 'kodilla-good-patterns'
+include 'kodilla-spring-intro'
+include 'kodilla-spring'
 
