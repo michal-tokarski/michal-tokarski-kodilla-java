@@ -52,7 +52,6 @@ public class SpringRunnerTestSuite {
         Assert.assertEquals("This is a square.", name);
     }
 
-
 }
 */
 

@@ -1,9 +1,8 @@
 package com.kodilla.spring.library;
 
-import org.springframework.stereotype.Repository;
-
-@Repository
+// @Repository /* deleted : error in the book */
 public final class LibraryDbController {
+
     public void saveData() {
         System.out.println("Saving data to the database.");
     }
