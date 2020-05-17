@@ -2,7 +2,7 @@ package com.kodilla.patterns.strategy.social;
 
 public class TwitterPublisher implements SocialPublisher {
 
-    String socialPublisherName = "Twitter";
+    private String socialPublisherName = "Twitter";
 
     @Override
     public String share() {

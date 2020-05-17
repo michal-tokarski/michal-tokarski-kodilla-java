@@ -2,7 +2,7 @@ package com.kodilla.patterns.strategy.social;
 
 public class SnapchatPublisher implements SocialPublisher {
 
-    String socialPublisherName = "Snapchat";
+    private String socialPublisherName = "Snapchat";
 
     @Override
     public String share() {
