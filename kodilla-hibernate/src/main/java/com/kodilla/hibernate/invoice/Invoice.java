@@ -20,7 +20,6 @@ public class Invoice {
     public Invoice(String invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
         this.items = items;
-        this.totalValue = getTotalValue();
     }
 
     // Getters :
