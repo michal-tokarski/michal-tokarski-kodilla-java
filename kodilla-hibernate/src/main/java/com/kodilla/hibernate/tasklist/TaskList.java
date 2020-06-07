@@ -15,6 +15,7 @@ public final class TaskList {
     private String listName;
     private String description;
     private List<Task> pureTaskList = new ArrayList<>(); // additional field
+    private List<Task> tasks = new ArrayList<>();
 
     public TaskList() {
     }
@@ -50,6 +51,16 @@ public final class TaskList {
     }
     */
 
+    @OneToMany(
+        targetEntity = Task.class,
+        mappedBy = "taskList",
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY
+    )
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
     private void setId(int id) {
         this.id = id;
     }
@@ -69,5 +80,9 @@ public final class TaskList {
         this.pureTaskList = pureTaskList;
     }
     */
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
 
 }
