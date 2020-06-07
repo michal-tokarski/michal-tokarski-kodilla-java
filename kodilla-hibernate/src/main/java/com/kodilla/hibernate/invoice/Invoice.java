@@ -19,7 +19,6 @@ public class Invoice {
 
     public Invoice(String invoiceNumber) {
         this.invoiceNumber = invoiceNumber;
-        this.items = items;
     }
 
     // Getters :
