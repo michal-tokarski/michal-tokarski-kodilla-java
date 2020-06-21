@@ -10,12 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-@Transactional
+// @Transactional
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class InvoiceDaoTestSuite {
@@ -23,13 +22,23 @@ public class InvoiceDaoTestSuite {
     @Autowired
     InvoiceDao invoiceDao;
 
+    @Autowired
+    ProductDao productDao;
+
+    @Autowired
+    ItemDao itemDao;
+
     @Test
     public void testInvoiceDaoSave(){
 
         // Given
         Invoice invoice1 = new Invoice("Invoice w/ 1 items");
         Invoice invoice2 = new Invoice("Invoice w/ 0 items");
-        Invoice invoice3 = new Invoice("Invoice w/ 3 item");
+        Invoice invoice3 = new Invoice("Invoice w/ 3 items");
+
+        invoiceDao.save(invoice1);
+        invoiceDao.save(invoice2);
+        invoiceDao.save(invoice3);
 
         List<Item> items1 = new ArrayList<>();
         List<Item> items2 = new ArrayList<>();
@@ -39,10 +48,14 @@ public class InvoiceDaoTestSuite {
         Product product2 = new Product("chainsaw");
         Product product3 = new Product("10 inch nails");
 
-        items1.add(new Item(product1, new BigDecimal(10), 3));
-        items3.add(new Item(product1, new BigDecimal(10), 9));
-        items3.add(new Item(product2, new BigDecimal(2000), 1));
-        items3.add(new Item(product3, new BigDecimal(2), 400));
+        productDao.save(product1);
+        productDao.save(product2);
+        productDao.save(product3);
+
+        items1.add(new Item(product1, new BigDecimal(10), 3, invoice1));
+        items3.add(new Item(product1, new BigDecimal(10), 9, invoice3));
+        items3.add(new Item(product2, new BigDecimal(2000), 1, invoice3));
+        items3.add(new Item(product3, new BigDecimal(2), 400,invoice3));
 
         invoice1.setItems(items1);
         invoice2.setItems(items2);

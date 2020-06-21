@@ -5,6 +5,15 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@NamedNativeQueries({
+
+        @NamedNativeQuery(
+            name = "Company.searchCompaniesByNameThatBeginsWith",
+            query = "SELECT * FROM COMPANIES WHERE LEFT(company_name, 3) = :SEARCHPARAM",
+            resultClass = Company.class)
+
+})
+
 @Entity
 @Table(name = "COMPANIES")
 public class Company {
@@ -50,4 +59,7 @@ public class Company {
     public void setEmployees(List<Employee> employees) {
         this.employees = employees;
     }
+
+
+
 }
