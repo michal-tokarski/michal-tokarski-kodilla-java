@@ -56,9 +56,9 @@ public class CompanyEmployeeDaoTestSuite {
         System.out.println("Test Results :");
         System.out.println("---------------");
         System.out.println("Search parameter : " + searchParam1);
-        System.out.println("Returned records : " + resultList1);
+        System.out.println("Returned records : " + resultList1.toString());
         System.out.println("Search parameter : " + searchParam2);
-        System.out.println("Returned records : " + resultList2);
+        System.out.println("Returned records : " + resultList2.toString());
 
         Assert.assertEquals(4, resultList1.size());
         Assert.assertEquals(0, resultList2.size());
@@ -112,9 +112,9 @@ public class CompanyEmployeeDaoTestSuite {
         System.out.println("Test Results :");
         System.out.println("---------------");
         System.out.println("Search parameter : " + searchParam1);
-        System.out.println("Returned records : " + resultList1);
+        System.out.println("Returned records : " + resultList1.toString());
         System.out.println("Search parameter : " + searchParam2);
-        System.out.println("Returned records : " + resultList2);
+        System.out.println("Returned records : " + resultList2.toString());
 
         Assert.assertEquals(2, resultList1.size());
         Assert.assertEquals(0, resultList2.size());

@@ -19,8 +19,7 @@ public class TaskFinancialDetailsDaoTestSuite {
     @Test
     public void testFindByPaid() {
         //Given
-        TaskFinancialDetails taskFinancialDetails =
-                new TaskFinancialDetails(new BigDecimal(115), false);
+        TaskFinancialDetails taskFinancialDetails = new TaskFinancialDetails(new BigDecimal(115), false);
         taskFinancialDetailsDao.save(taskFinancialDetails);
         int id = taskFinancialDetails.getId();
 

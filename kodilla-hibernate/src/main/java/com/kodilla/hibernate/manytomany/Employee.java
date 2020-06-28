@@ -77,5 +77,13 @@ public class Employee {
         this.companies = companies;
     }
 
-
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                //", companies=" + companies +
+                '}';
+    }
 }
