@@ -22,7 +22,7 @@ public class CompanyEmployeeDaoTestSuite {
     EmployeeDao employeeDao;
 
     @Test
-    public void test_SearchCompaniesByNameThatBeginsWith(){
+    public void test_SearchCompaniesByName_BeginningWith_Given3Characters(){
 
         //Given
         // Create objects
@@ -49,8 +49,8 @@ public class CompanyEmployeeDaoTestSuite {
         // When
         String searchParam1 = "Ban";
         String searchParam2 = "Ben";
-        List<Company> resultList1 = companyDao.searchCompaniesByNameThatBeginsWith(searchParam1);
-        List<Company> resultList2 = companyDao.searchCompaniesByNameThatBeginsWith(searchParam2);
+        List<Company> resultList1 = companyDao.searchCompaniesByName_BeginningWith_Given3Characters(searchParam1);
+        List<Company> resultList2 = companyDao.searchCompaniesByName_BeginningWith_Given3Characters(searchParam2);
 
         // Then
         System.out.println("Test Results :");
@@ -78,7 +78,7 @@ public class CompanyEmployeeDaoTestSuite {
     }
 
     @Test
-    public void test_SearchEmployeesByLastnameThatEquals(){
+    public void test_SearchEmployeesByLastname_Equaling_GivenString(){
 
         // Given
         // Create objects
@@ -105,8 +105,8 @@ public class CompanyEmployeeDaoTestSuite {
         // When
         String searchParam1 = "Malinowski";
         String searchParam2 = "Nowakowski";
-        List<Employee> resultList1 = employeeDao.searchEmployeesByLastnameThatEquals(searchParam1);
-        List<Employee> resultList2 = employeeDao.searchEmployeesByLastnameThatEquals(searchParam2);
+        List<Employee> resultList1 = employeeDao.searchEmployeesByLastname_Equaling_GivenString(searchParam1);
+        List<Employee> resultList2 = employeeDao.searchEmployeesByLastname_Equaling_GivenString(searchParam2);
 
         // Then
         System.out.println("Test Results :");

@@ -5,13 +5,17 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedQueries({
 
-        @NamedQuery(
-            name = "Employee.searchEmployeesByLastnameThatEquals",
-            query = "FROM Employee WHERE lastName = :SEARCHPARAM")
+@NamedQuery(
+    name = "Employee.searchEmployeesByLastname_Equaling_GivenString",
+    query = "FROM Employee WHERE lastName = :SEARCHPARAM"
+)
 
-})
+@NamedNativeQuery(
+    name = "Employee.searchEmployeesByLastname_Containing_GivenString",
+        query = "SELECT * FROM EMPLOYEES WHERE lastname LIKE CONCAT ('%', :SEARCHPARAM, '%')",
+    resultClass = Employee.class
+)
 
 
 @Entity
@@ -79,11 +83,6 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                //", companies=" + companies +
-                '}';
+        return "[id=" + id + "] " + firstname + " " + lastname + ";";
     }
 }

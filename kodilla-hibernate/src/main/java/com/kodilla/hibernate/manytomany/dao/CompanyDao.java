@@ -11,9 +11,12 @@ import java.util.List;
 
 @Transactional
 @Repository
-public interface CompanyDao extends CrudRepository<Company, Integer> {
+public interface CompanyDao extends CrudRepository <Company, Integer> {
 
     @Query(nativeQuery = true)
-    List<Company> searchCompaniesByNameThatBeginsWith(@Param("SEARCHPARAM") String searchParam);
+    List<Company> searchCompaniesByName_BeginningWith_Given3Characters(@Param("SEARCHPARAM") String searchParam);
+
+    @Query(nativeQuery = true)
+    List<Company> searchCompaniesByName_Containing_GivenString(@Param("SEARCHPARAM") String searchParam);
 
 }

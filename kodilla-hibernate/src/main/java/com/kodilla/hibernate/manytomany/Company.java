@@ -5,14 +5,19 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-@NamedNativeQueries({
 
-        @NamedNativeQuery(
-            name = "Company.searchCompaniesByNameThatBeginsWith",
-            query = "SELECT * FROM COMPANIES WHERE LEFT(company_name, 3) = :SEARCHPARAM",
-            resultClass = Company.class)
+@NamedNativeQuery(
+    name = "Company.searchCompaniesByName_BeginningWith_Given3Characters",
+    query = "SELECT * FROM COMPANIES WHERE LEFT(company_name, 3) = :SEARCHPARAM",
+    resultClass = Company.class
+)
 
-})
+@NamedNativeQuery(
+    name = "Company.searchCompaniesByName_Containing_GivenString",
+    query = "SELECT * FROM COMPANIES WHERE company_name LIKE CONCAT ('%', :SEARCHPARAM, '%')",
+    resultClass = Company.class
+)
+
 
 @Entity
 @Table(name = "COMPANIES")
@@ -62,10 +67,6 @@ public class Company {
 
     @Override
     public String toString() {
-        return "Company{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                //", employees=" + employees +
-                '}';
+        return "[id=" + id + "] " + name + ";";
     }
 }

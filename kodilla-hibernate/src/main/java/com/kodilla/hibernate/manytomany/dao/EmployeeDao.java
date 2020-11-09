@@ -13,7 +13,10 @@ import java.util.List;
 @Repository
 public interface EmployeeDao extends CrudRepository<Employee, Integer> {
 
-    @Query
-    List<Employee> searchEmployeesByLastnameThatEquals(@Param("SEARCHPARAM") String searchParam);
+    @Query(nativeQuery = true)
+    List<Employee> searchEmployeesByLastname_Equaling_GivenString(@Param("SEARCHPARAM") String searchParam);
+
+    @Query(nativeQuery = true)
+    List<Employee> searchEmployeesByLastname_Containing_GivenString(@Param("SEARCHPARAM") String searchParam);
 
 }
