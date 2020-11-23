@@ -16,6 +16,7 @@ public class OrderFacade {
     private static Logger LOGGER = LoggerFactory.getLogger(OrderFacade.class);
 
     public void processOrder(OrderDto order, Long userId) throws OrderProcessingException {
+
         boolean wasError = false;
         long orderId = shopService.openOrder(userId);
         LOGGER.info("Registering new order, ID: " + orderId);
