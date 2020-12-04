@@ -14,6 +14,11 @@ public class Student implements Observer {
         this.lastName = lastName;
     }
 
+    @Override
+    public String toString() {
+        return "Student {" + firstName + " " + lastName + "}";
+    }
+
     public String getStudentId() {
         return studentId;
     }
@@ -29,9 +34,9 @@ public class Student implements Observer {
     @Override
     public void updateNew(Pipeline pipeline) {
         String message
-                = "To : " + getFirstName() + getLastName() + " : " + "\n"
-                + "One new assignment has been posted - "
-                + pipeline.toString() ;
+                = "To : " + getFirstName() + getLastName() + " : "
+                + "A new assignment has been posted in - " + pipeline.toString()
+                + "(total new : " + pipeline.getNewAssignmentsCount() + ")";
         System.out.println(message);
         newAssignmentsCount++;
     }
@@ -39,9 +44,9 @@ public class Student implements Observer {
     @Override
     public void updateReviewed(Pipeline pipeline) {
         String message
-                = "To : " + getFirstName() + getLastName() + " : " + "\n"
-                + "One assignment has been reviewed - "
-                + pipeline.toString() ;
+                = "To : " + getFirstName() + getLastName() + " : "
+                + "An assignment has been reviewed in - " + pipeline.toString()
+                + "(total reviewed : " + pipeline.getReviewedAssignmentsCount() + ")";
         System.out.println(message);
         reviewedAssignmentsCount++;
     }
@@ -53,6 +58,5 @@ public class Student implements Observer {
     public int getReviewedAssignmentsCount() {
         return reviewedAssignmentsCount;
     }
-
 
 }

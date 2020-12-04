@@ -23,21 +23,25 @@ public class Pipeline implements Observable {
     }
 
     @Override
+    public String toString() {
+        return "Pipeline {" + student.getFirstName() + " " + student.getLastName() + " / " + course + "}";
+    }
+
+    @Override
     public void subscribeObserver(Observer observer) {
         observers.add(observer);
         String message
-                = "To : " + observer.toString() + " : " + "\n"
-                + "You are subscribing now to the pipeline of : "
-                + student.getFirstName() + " " + student.getLastName() + " (" + course.toString() + ") " ;
+                = "To : " + observer.getFirstName() + " " + observer.getLastName() + " : "
+                + "You are subscribing now to - " + toString();
         System.out.println(message);
     }
 
     @Override
     public void notifyAllObservers(String actionType) {
         for (Observer observer : observers) {
-            if (actionType == "new") {
+            if (actionType.equals("new") ) {
                 observer.updateNew(this);
-            } else if (actionType == "reviewed") {
+            } else if (actionType.equals("reviewed")) {
                 observer.updateReviewed(this);
             }
         }
@@ -47,9 +51,8 @@ public class Pipeline implements Observable {
     public void unsubscribeObserver(Observer observer) {
         observers.remove(observer);
         String message
-                = "To : " + observer.toString() + " : " + "\n"
-                + "You have just unsubscribed from the pipeline of : "
-                + student.getFirstName() + " " + student.getLastName() + " (" + course.toString() + ") " ;
+                = "To : " + observer.getFirstName() + " " + observer.getLastName() + " : "
+                + "You have just unsubscribed from - " + toString();
         System.out.println(message);
         messages.add(message);
     }
@@ -66,11 +69,11 @@ public class Pipeline implements Observable {
         notifyAllObservers("reviewed");
     }
 
-    @Override
-    public String toString() {
-        return "Pipeline{" +
-                "student = " + student.getFirstName() + student.getLastName() +
-                " - " + course + "}";
+    public int getNewAssignmentsCount() {
+        return newAssignmentsCount;
     }
 
+    public int getReviewedAssignmentsCount() {
+        return reviewedAssignmentsCount;
+    }
 }

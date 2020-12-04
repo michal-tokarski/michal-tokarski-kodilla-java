@@ -1,22 +1,17 @@
 package com.kodilla.patterns2.observer.homework;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class PipelineAssignment {
 
     private String pipelineAssignmentId;
     private CourseAssignment courseAssignment;
     private Boolean isNew;
     private Boolean isReviewed;
-    private List<Message> messages;
 
     public PipelineAssignment(String pipelineAssignmentId, CourseAssignment courseAssignment, Boolean isNew, Boolean isReviewed) {
         this.pipelineAssignmentId = pipelineAssignmentId;
         this.courseAssignment = courseAssignment;
         this.isNew = isNew;
         this.isReviewed = isReviewed;
-        messages = new ArrayList<>();
     }
 
     public String getPipelineAssignmentId() {
