@@ -1,9 +1,26 @@
+/*
+-------------------------------------------------------------------------------------------
+Task 24.4.
+1. Utwórz pakiet com.kodilla.patterns2.observer.homework zarówno w katalogu src/main/java,
+   jak i w katalogu src/test/java.
+2. Następnie trzeba stworzyć klasę reprezentującą kolejkę zadań kursanta implementującą interfejs
+   utworzony według zasad właściwych dla Observable,
+3. W kolejnym kroku utwórz klasę reprezentującą mentora,
+   implementującą interfejs stworzony według zasad właściwych dla Observer
+4. Stwórz test, a w nim utwórz kilka kolejek zadań kursantów oraz dwóch mentorów.
+   Zasubskrybuj mentorów na powiadomienia o nowych zadaniach w kolejce.
+   Test powinien sprawdzać czy całość działa poprawnie.
+   -------------------------------------------------------------------------------------------
+ */
+
 package com.kodilla.patterns2.observer.homework;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+
+
 
 public class HomeworkTestSuite {
 
@@ -84,9 +101,9 @@ public class HomeworkTestSuite {
         // Then
         System.out.println("\n");
         System.out.println("Check if all mentors received correct no. of notifications of all new assignments :");
-        System.out.println(mentor1.toString() + " : " +  "No. of new assigments notifications - " + mentor1.getNewAssignmentsCount());
-        System.out.println(mentor2.toString() + " : " +  "No. of new assigments notifications - " + mentor2.getNewAssignmentsCount());
-        System.out.println(mentorC.toString() + " : " +  "No. of new assigments notifications - " + mentorC.getNewAssignmentsCount());
+        System.out.println(mentor1.toString() + " : " +  "No. of new assignments - " + mentor1.getNewAssignmentsCount());
+        System.out.println(mentor2.toString() + " : " +  "No. of new assignments - " + mentor2.getNewAssignmentsCount());
+        System.out.println(mentorC.toString() + " : " +  "No. of new assignments - " + mentorC.getNewAssignmentsCount());
         assertEquals(5, mentor1.getNewAssignmentsCount());
         assertEquals(7, mentor2.getNewAssignmentsCount());
         assertEquals(9, mentorC.getNewAssignmentsCount());
@@ -110,11 +127,11 @@ public class HomeworkTestSuite {
         // Then
         System.out.println("\n");
         System.out.println("Check if all students received correct no. of notifications of all assignments that have been reviewed :");
-        System.out.println(student1.toString() + " : " +  "No. of new assigments notifications - " + student1.getReviewedAssignmentsCount());
-        System.out.println(student2.toString() + " : " +  "No. of new assigments notifications - " + student2.getReviewedAssignmentsCount());
-        System.out.println(student3.toString() + " : " +  "No. of new assigments notifications - " + student3.getReviewedAssignmentsCount());
-        System.out.println(student4.toString() + " : " +  "No. of new assigments notifications - " + student4.getReviewedAssignmentsCount());
-        System.out.println(student5.toString() + " : " +  "No. of new assigments notifications - " + student5.getReviewedAssignmentsCount());
+        System.out.println(student1.toString() + " : " +  "No. of reviewed assignments - " + student1.getReviewedAssignmentsCount());
+        System.out.println(student2.toString() + " : " +  "No. of reviewed assignments - " + student2.getReviewedAssignmentsCount());
+        System.out.println(student3.toString() + " : " +  "No. of reviewed assignments - " + student3.getReviewedAssignmentsCount());
+        System.out.println(student4.toString() + " : " +  "No. of reviewed assignments - " + student4.getReviewedAssignmentsCount());
+        System.out.println(student5.toString() + " : " +  "No. of reviewed assignments - " + student5.getReviewedAssignmentsCount());
         assertEquals(1, student1.getReviewedAssignmentsCount());
         assertEquals(1, student2.getReviewedAssignmentsCount());
         assertEquals(2, student3.getReviewedAssignmentsCount());
