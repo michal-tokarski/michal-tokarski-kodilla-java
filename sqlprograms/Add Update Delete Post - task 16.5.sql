@@ -1,0 +1,19 @@
+/* Point 1 */
+INSERT INTO POSTS (USER_ID, BODY)
+VALUES ("2", "New post added on 27.5.2020");
+COMMIT;
+SELECT * FROM POSTS;
+
+/* Point 2 */
+UPDATE POSTS
+SET BODY = "To delete"
+ WHERE ID = 7;
+COMMIT;
+SELECT * FROM POSTS;
+
+/* Point 3 */
+DELETE FROM POSTS
+ WHERE ID = 7;
+COMMIT;
+SELECT * FROM POSTS;
+
