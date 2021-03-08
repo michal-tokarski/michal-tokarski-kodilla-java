@@ -11,8 +11,8 @@ public class EBayTestingApp {
 
     public static void main(String[] args) {
 
-        // WebDriver driver = WebDriverConfig.getDriver(WebDriverConfig.CHROME);
-        WebDriver driver = WebDriverConfig.getDriver(WebDriverConfig.FIREFOX);
+        WebDriver driver = WebDriverConfig.getDriver(WebDriverConfig.CHROME);
+        // WebDriver driver = WebDriverConfig.getDriver(WebDriverConfig.FIREFOX);
         driver.get("https://www.ebay.com/");
 
         WebElement searchField = driver.findElement(By.id(SEARCHFIELD));
