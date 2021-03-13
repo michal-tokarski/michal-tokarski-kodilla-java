@@ -11,7 +11,7 @@ public class FacebookTestingApp {
     public static final String XPATH_ACCEPTCOOKIES = "//div[contains(@class, \"_9o-r\")]/button[2]";
     public static final String XPATH_CREATEACCOUNT = "//div[contains(@class, \"_6ltg\")]/a[1]";
 
-    // temoporarily on hold :
+    // temporarily on hold :
     // public static final String XPATH_WAIT_FOR = "//div[contains(@class, \"_3ixn\")]";
 
     public static final String NAME_BIRTHDAY = "birthday_day";
@@ -30,7 +30,7 @@ public class FacebookTestingApp {
         WebElement createAccount = driver.findElement(By.xpath(XPATH_CREATEACCOUNT));
         createAccount.click();
 
-        // temoporarily on hold :
+        // temporarily on hold :
         // while (!driver.findElement(By.xpath(XPATH_WAIT_FOR)).isDisplayed()) ;
 
         Thread.sleep(500);
