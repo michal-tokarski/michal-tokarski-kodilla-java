@@ -126,6 +126,7 @@ public class CrudAppTestSuite {
 
     }
 
+
     private void removeTestTaskfromCrudApp (String taskName) throws InterruptedException {
 
         driver.navigate().refresh();
@@ -151,29 +152,25 @@ public class CrudAppTestSuite {
         WebDriver driverCrudApp = driver;
         driverCrudApp.get(CRUDAPP_URL);
 
-        // driverCrudApp.findElement(By.xpath("/html/body/div[1]/header/div/div[2]/div[2]/a[1]")).click();
-        driverCrudApp.findElement(By.xpath(".//button[contains(@href, \"/login\")]")).click();
-
-        String myLogin = "michal_tokarski@wp.pl";
-        String myPassword = "Chicamauga_18*63";
-
-        driverCrudApp.findElement(By.id("login_field")).sendKeys(myLogin);
-        driverCrudApp.findElement(By.id("password")).sendKeys(myPassword);
-        WebElement el = driverCrudApp.findElement(By.name("commit"));
-        el.submit();
-
         Thread.sleep(4000);
 
-        result = driverCrudApp.findElements(By.name("label")).stream()
-                .anyMatch(theSpan -> theSpan.getText().equals(taskName));
+        result = driverCrudApp.findElements(By.xpath("//form[@class=\"datatable__row\"]")).stream()
+                .anyMatch(anyForm -> anyForm.findElement(By.xpath(".//p[@class=\"datatable__field-value\"]")).getText().equals(taskName));
 
-        driverCrudApp.close();
+        // driverCrudApp.close();
 
         return result;
 
     }
 
 
+    /*
+    Task 31.4 :
+    Zadanie: Sprzątamy w aplikacji CRUD App
+    Twoim zadaniem jest dopisanie do testu shouldCreateTrelloCard() wywołania kolejnej metody, ...
+    ... która usunie z aplikacji CRUD App (i tylko z niej – nie usuwamy niczego z Trello) zadanie testowe ...
+    ... stworzone podczas wykonywania testu.
+     */
     @Test
     public void test_shouldCreateTrelloCard() throws InterruptedException {
 
